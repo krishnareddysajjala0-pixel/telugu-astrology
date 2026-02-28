@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+env/
+.env
+
+# Database
+kundali.db
+
+# Windows App Build Folders
+winapp/bin/
+winapp/obj/
+publish/
+
+# IDE
+.vscode/
+.idea/
+*.sln
+*.csproj
+*.user
+
+# Large Data
+winapp/sweph.zip
+winapp/sweph/

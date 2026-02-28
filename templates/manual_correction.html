@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="te">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>సానుకూల జననకాల సవరణలు</title>
+    <!-- PWA settings -->
+    <link rel="manifest" href="/static/manifest.json">
+    <meta name="theme-color" content="#1A1A1D">
+    <link rel="apple-touch-icon" href="/static/icons/icon-192x192.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Noto Serif Telugu', serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: #f8fafc;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Starry background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(2px 2px at 20% 30%, #fff, transparent),
+                radial-gradient(2px 2px at 40% 70%, #fff, transparent),
+                radial-gradient(3px 3px at 60% 20%, #fff, transparent),
+                radial-gradient(2px 2px at 80% 50%, #fff, transparent);
+            background-size: 200px 200px;
+            z-index: -1;
+            animation: stars 20s linear infinite;
+        }
+
+        @keyframes stars {
+            from {
+                transform: translateY(0);
+            }
+
+            to {
+                transform: translateY(-200px);
+            }
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .cosmic-card {
+            background: rgba(25, 25, 35, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow:
+                0 25px 50px -12px rgba(0, 0, 0, 0.5),
+                0 0 0 1px rgba(255, 255, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 60px;
+            /* Space for action bar */
+        }
+
+        .cosmic-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg,
+                    #ff6b6b,
+                    #ffd93d,
+                    #6bcf7f,
+                    #4d96ff,
+                    #9d4edd);
+            border-radius: 24px 24px 0 0;
+        }
+
+        /* Header Section */
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 25%;
+            width: 50%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #667eea, transparent);
+            border-radius: 3px;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            background: linear-gradient(45deg, #ffffff, #a0a0ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 10px rgba(255, 255, 255, 0.2);
+        }
+
+        .header p {
+            color: #a0a0ff;
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* Content Grid */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Info Boxes */
+        .info-box,
+        .warning-box {
+            background: rgba(40, 40, 60, 0.7);
+            border-radius: 12px;
+            padding: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .info-box:hover,
+        .warning-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .info-box {
+            border-left: 4px solid #3498db;
+        }
+
+        .warning-box {
+            border-left: 4px solid #ff9800;
+            background: rgba(255, 152, 0, 0.1);
+        }
+
+        .section-title {
+            font-size: 16px;
+            color: #ffffff;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-title i {
+            color: #3498db;
+        }
+
+        .info-item {
+            margin-bottom: 8px;
+            padding: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            border-left: 3px solid #3498db;
+        }
+
+        .info-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .info-label {
+            font-size: 12px;
+            color: #a0a0ff;
+            margin-bottom: 2px;
+        }
+
+        .info-value {
+            font-size: 14px;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        /* Warning Styling */
+        .warning-box .section-title i {
+            color: #ff9800;
+        }
+
+        .warning-content {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 15px;
+            background: rgba(255, 152, 0, 0.15);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 152, 0, 0.3);
+        }
+
+        .warning-icon {
+            font-size: 24px;
+            color: #ff9800;
+            flex-shrink: 0;
+        }
+
+        .warning-text {
+            color: #ffd700;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        /* Form Section */
+        .form-section {
+            background: rgba(30, 30, 50, 0.8);
+            border-radius: 16px;
+            padding: 20px;
+            margin-top: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        .form-section::before {
+            content: '✨';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(25, 25, 35, 0.95);
+            padding: 0 20px;
+            font-size: 20px;
+            color: #ffd700;
+        }
+
+        /* Form Elements */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            color: #d0d0ff;
+            font-size: 14px;
+        }
+
+        .input-with-icon {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #a0a0ff;
+            font-size: 16px;
+            z-index: 2;
+        }
+
+        select,
+        input {
+            width: 100%;
+            padding: 10px 10px 10px 40px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 14px;
+            font-family: 'Segoe UI', 'Noto Serif Telugu', serif;
+            transition: all 0.3s ease;
+        }
+
+        select:focus,
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        select option {
+            background: #1a1a2e;
+            color: white;
+            padding: 10px;
+        }
+
+        /* Time Inputs */
+        .time-inputs {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .time-input-group {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .time-input-group:focus-within {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+        }
+
+        .time-label {
+            font-size: 12px;
+            color: #a0a0ff;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .time-input {
+            font-size: 20px;
+            font-weight: 700;
+            text-align: center;
+            color: #ffffff;
+            background: transparent;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            padding: 8px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .time-input:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Results Display */
+        .results-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        .result-card {
+            background: linear-gradient(135deg, rgba(40, 40, 80, 0.8), rgba(30, 30, 60, 0.8));
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .result-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .result-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #6bcf7f, #4d96ff);
+        }
+
+        .result-label {
+            font-size: 12px;
+            color: #a0a0ff;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .result-value {
+            font-size: 24px;
+            font-weight: 800;
+            color: #ffffff;
+            margin: 6px 0;
+            text-shadow: 0 2px 5px rgba(255, 255, 255, 0.2);
+        }
+
+        .result-subtext {
+            font-size: 11px;
+            color: #8888cc;
+        }
+
+        /* Note Box */
+        .note-box {
+            background: rgba(56, 189, 248, 0.1);
+            border-radius: 10px;
+            padding: 12px;
+            margin: 15px 0;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .note-icon {
+            font-size: 18px;
+            color: #38bdf8;
+            flex-shrink: 0;
+        }
+
+        .note-text {
+            color: #a0d8ff;
+            font-size: 12px;
+            line-height: 1.4;
+        }
+
+        /* Button Container */
+        .button-container {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: 'Segoe UI', 'Noto Serif Telugu', serif;
+            font-size: 14px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+            min-width: 200px;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .confirm-btn {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: #052e16;
+            box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
+        }
+
+        .confirm-btn:hover {
+            background: linear-gradient(135deg, #16a34a, #22c55e);
+        }
+
+        .btn-icon {
+            font-size: 16px;
+        }
+
+        /* Fixed Bottom Action Bar */
+        .fixed-bottom-bar {
+            position: fixed !important;
+            bottom: 30px !important;
+            left: 50% !important;
+            transform: translateX(-50%) !important;
+            margin: 0 !important;
+            background: rgba(20, 19, 50, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(120, 119, 198, 0.3);
+            border-radius: 30px;
+            padding: 10px 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            scrollbar-width: none;
+            z-index: 9999;
+            max-width: 95vw;
+        }
+
+        .fixed-bottom-bar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .float-btn {
+            flex: 0 0 auto;
+            padding: 10px 18px;
+            border-radius: 20px;
+            border: none;
+            cursor: pointer;
+            font-family: 'Segoe UI', 'Noto Serif Telugu', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: white;
+            white-space: nowrap;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.2s ease, filter 0.2s ease;
+        }
+
+        .float-btn:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.2);
+        }
+
+        .float-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Floating Animation */
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            .cosmic-card {
+                padding: 25px;
+            }
+
+            .header h1 {
+                font-size: 28px;
+            }
+
+            .results-container {
+                grid-template-columns: 1fr;
+            }
+
+            .button-container {
+                flex-direction: column;
+            }
+
+            .btn {
+                min-width: auto;
+                width: 100%;
+            }
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(45deg, #764ba2, #667eea);
+        }
+
+        /* Nakshatra Animation */
+        .nakshatra-animation {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 18px;
+            color: #ffd700;
+            font-weight: 600;
+        }
+
+        /* Padam Indicator */
+        .padam-indicator {
+            display: inline-flex;
+            gap: 5px;
+            margin-top: 10px;
+        }
+
+        .padam-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .padam-dot.active {
+            background: #ffd700;
+            transform: scale(1.2);
+            box-shadow: 0 0 10px #ffd700;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="cosmic-card">
+
+            <!-- Header -->
+            <div class="header">
+                <h1><i class="fas fa-star-and-crescent"></i> నక్షత్ర సమయం సరిచేయండి</h1>
+                <p>సిస్టమ్ లెక్కింపు తప్పుగా ఉంటే మీరు సరిచేయవచ్చు</p>
+            </div>
+
+            <!-- Content Grid -->
+            <div class="content-grid">
+                <!-- Original Calculation -->
+                <div class="info-box">
+                    <h2 class="section-title">
+                        <i class="fas fa-calculator"></i> సిస్టమ్ లెక్కింపు
+                    </h2>
+                    <div class="info-item">
+                        <div class="info-label">నక్షత్రం</div>
+                        <div class="info-value">{{ auto_nakshatra }}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">గడిచిన సమయం</div>
+                        <div class="info-value">{{ auto_elapsed_h }}గం {{ auto_elapsed_m }}ని</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">మిగిలిన సమయం</div>
+                        <div class="info-value">{{ 24-auto_elapsed_h }}గం {{ 60-auto_elapsed_m }}ని</div>
+                    </div>
+                </div>
+
+                <!-- Warning -->
+                <div class="warning-box">
+                    <h2 class="section-title">
+                        <i class="fas fa-exclamation-triangle"></i> గమనిక
+                    </h2>
+                    <div class="warning-content">
+                        <div class="warning-icon">⚠️</div>
+                        <div class="warning-text">
+                            సిస్టమ్ లెక్కింపు తప్పుగా ఉంటే మాత్రమే సరిచేయండి.
+                            సాధారణంగా సిస్టమ్ లెక్కింపు సరైనదే. జన్మసమయం ఖచ్చితంగా తెలిస్తే మాత్రమే సరిచేయండి.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Correction Form -->
+            <div class="form-section">
+                <h2 class="section-title" style="text-align: center; justify-content: center;">
+                    <i class="fas fa-edit floating"></i> మీరు సరిచేయండి
+                </h2>
+
+                <form method="post" action="/chart2" id="correctionForm">
+                    <input type="hidden" name="dob" value="{{ dob }}">
+                    <input type="hidden" name="tob" value="{{ tob }}">
+                    <input type="hidden" name="correction_type" value="manual">
+
+                    <!-- Nakshatra Selection -->
+                    <div class="form-group">
+                        <label for="manual_nakshatra">
+                            <i class="fas fa-star"></i> నక్షత్రం ఎంచుకోండి
+                        </label>
+                        <div class="input-with-icon">
+                            <div class="input-icon">
+                                <i class="fas fa-star-and-crescent"></i>
+                            </div>
+                            <select id="manual_nakshatra" name="manual_nakshatra" required>
+                                <option value="">-- దయచేసి నక్షత్రం ఎంచుకోండి --</option>
+                                {% for nak in all_nakshatras %}
+                                <option value="{{ nak }}" {% if nak==manual_nakshatra or nak==auto_nakshatra
+                                    %}selected{% endif %}>
+                                    {{ nak }}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Time Inputs -->
+                    <div class="form-group">
+                        <label>
+                            <i class="fas fa-clock"></i> గడిచిన సమయం (24 గంటల్లో)
+                        </label>
+                        <div class="time-inputs">
+                            <div class="time-input-group">
+                                <div class="time-label">
+                                    <i class="fas fa-hourglass-start"></i> గంటలు
+                                </div>
+                                <input type="number" name="manual_elapsed_h" min="0" max="23"
+                                    value="{{ manual_elapsed_h }}" class="time-input" required
+                                    onchange="updateResults()">
+                            </div>
+                            <div class="time-input-group">
+                                <div class="time-label">
+                                    <i class="fas fa-hourglass-half"></i> నిమిషాలు
+                                </div>
+                                <input type="number" name="manual_elapsed_m" min="0" max="59"
+                                    value="{{ manual_elapsed_m }}" class="time-input" required
+                                    onchange="updateResults()">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hidden fields -->
+                    <input type="hidden" name="manual_nak_index" id="manual_nak_index" value="{{ nak_index }}">
+                    <input type="hidden" name="manual_nak_elapsed" id="manual_nak_elapsed">
+                    <input type="hidden" name="manual_nak_remaining" id="manual_nak_remaining">
+                    <input type="hidden" name="manual_padam" id="manual_padam">
+                    <input type="hidden" name="manual_nakshatra" id="final_nakshatra"
+                        value="{{ manual_nakshatra or auto_nakshatra }}">
+
+                    <!-- Results Display -->
+                    <div class="results-container">
+                        <div class="result-card">
+                            <div class="result-label">
+                                <i class="fas fa-history"></i> గడిచిన సమయం
+                            </div>
+                            <div class="result-value" id="elapsedDisplay">
+                                {{ nak_elapsed }}
+                            </div>
+                            <div class="result-subtext">ఈ నక్షత్రంలో</div>
+                        </div>
+
+                        <div class="result-card">
+                            <div class="result-label">
+                                <i class="fas fa-hourglass-end"></i> మిగిలిన సమయం
+                            </div>
+                            <div class="result-value" id="remainingDisplay">
+                                {{ nak_remaining }}
+                            </div>
+                            <div class="result-subtext">జన్మ సమయంలో</div>
+                        </div>
+                    </div>
+
+                    <!-- Padam Indicator -->
+                    <div class="nakshatra-animation" id="padamIndicator">
+                        <div>పాదం: <span id="padamDisplay">{{ padam }}</span></div>
+                        <div class="padam-indicator" id="padamDots">
+                            <div class="padam-dot"></div>
+                            <div class="padam-dot"></div>
+                            <div class="padam-dot"></div>
+                            <div class="padam-dot"></div>
+                        </div>
+                    </div>
+
+                    <!-- Note Box -->
+                    <div class="note-box">
+                        <div class="note-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <div class="note-text">
+                            <strong>గమనిక:</strong> నక్షత్రం మొత్తం 24 గంటలు (13°20′). ఎంచుకున్న సమయం ఆధారంగా పాదం
+                            స్వయంగా లెక్కించబడుతుంది.
+                            సరైన జన్మసమయం తెలిస్తే మాత్రమే సరిచేయండి.
+                        </div>
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="button-container">
+                        <button type="submit" class="btn confirm-btn">
+                            <span class="btn-icon">✅</span>
+                            ధ్రువీకరించి దశచక్రం చూడండి
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Floating Bottom Action Bar -->
+    <div class="fixed-bottom-bar" id="action-bar">
+        <button class="float-btn" style="background: linear-gradient(135deg, #1e3c72, #2a5298);"
+            onclick="window.location.href='/'">
+            <i class="fas fa-home"></i> హోమ్
+        </button>
+        <button class="float-btn" style="background: linear-gradient(135deg, #4CAF50, #2E7D32);"
+            onclick="window.location.href='/go-to-birth-chart'">
+            <i class="fas fa-arrow-left"></i> కుండలికి
+        </button>
+        <button class="float-btn" style="background: linear-gradient(135deg, #8b5cf6, #6d28d9);"
+            onclick="window.location.href='/go-to-dasha-chart'">
+            <i class="fas fa-calendar-alt"></i> దశాచార
+        </button>
+    </div>
+
+    <script>
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function () {
+            updateResults();
+            updatePadamIndicator();
+
+            // Add animation to nakshatra select
+            const nakshatraSelect = document.getElementById('manual_nakshatra');
+            nakshatraSelect.addEventListener('change', function () {
+                updateResults();
+                animateSelection(this);
+            });
+
+            // Add input validation
+            document.querySelectorAll('.time-input').forEach(input => {
+                input.addEventListener('input', function () {
+                    validateTimeInput(this);
+                    updateResults();
+                });
+            });
+        });
+
+        function updateResults() {
+            // Get current values
+            const selectedNakshatra = document.getElementById('manual_nakshatra').value;
+            let hours = parseInt(document.querySelector('input[name="manual_elapsed_h"]').value) || 0;
+            let minutes = parseInt(document.querySelector('input[name="manual_elapsed_m"]').value) || 0;
+
+            // Validate and normalize values
+            hours = Math.max(0, Math.min(23, hours));
+            minutes = Math.max(0, Math.min(59, minutes));
+
+            // Update input fields with validated values
+            document.querySelector('input[name="manual_elapsed_h"]').value = hours;
+            document.querySelector('input[name="manual_elapsed_m"]').value = minutes;
+
+            // Calculate remaining time
+            let remainingHours = 24 - hours;
+            let remainingMinutes = 60 - minutes;
+
+            if (remainingMinutes === 60) {
+                remainingMinutes = 0;
+                remainingHours += 1;
+            }
+
+            if (remainingMinutes < 0) {
+                remainingMinutes = 60 + remainingMinutes;
+                remainingHours -= 1;
+            }
+
+            // Ensure remaining hours don't exceed 24
+            remainingHours = Math.max(0, Math.min(24, remainingHours));
+
+            // Calculate padam (1-4 based on elapsed time percentage)
+            const totalMinutes = (hours * 60) + minutes;
+            const totalNakshatraMinutes = 24 * 60;
+            const padam = Math.min(4, Math.floor((totalMinutes / totalNakshatraMinutes) * 4) + 1);
+
+            // Update displayed results
+            document.getElementById('elapsedDisplay').textContent =
+                `${hours}గం ${minutes}ని`;
+            document.getElementById('remainingDisplay').textContent =
+                `${remainingHours}గం ${remainingMinutes}ని`;
+            document.getElementById('padamDisplay').textContent = padam;
+
+            // Update hidden fields
+            document.getElementById('final_nakshatra').value = selectedNakshatra;
+            document.getElementById('manual_nak_elapsed').value = `${hours}గం ${minutes}ని`;
+            document.getElementById('manual_nak_remaining').value = `${remainingHours}గం ${remainingMinutes}ని`;
+            document.getElementById('manual_padam').value = padam;
+
+            // Update nakshatra index if we have the list
+            if (selectedNakshatra) {
+                const nakshatras = Array.from(document.querySelectorAll('#manual_nakshatra option'))
+                    .map(opt => opt.value)
+                    .filter(val => val);
+                const index = nakshatras.indexOf(selectedNakshatra);
+                if (index !== -1) {
+                    document.getElementById('manual_nak_index').value = index;
+                }
+            }
+
+            // Update padam indicator
+            updatePadamIndicator();
+        }
+
+        function updatePadamIndicator() {
+            const padam = parseInt(document.getElementById('padamDisplay').textContent) || 1;
+            const dots = document.querySelectorAll('.padam-dot');
+
+            dots.forEach((dot, index) => {
+                if (index < padam) {
+                    dot.classList.add('active');
+                    dot.style.animationDelay = `${index * 0.2}s`;
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+
+        function validateTimeInput(input) {
+            const value = parseInt(input.value) || 0;
+            const max = input.name.includes('_h') ? 23 : 59;
+            const min = 0;
+
+            if (value > max) input.value = max;
+            if (value < min) input.value = min;
+
+            // Add visual feedback
+            if (value === max) {
+                input.style.borderColor = '#ff9800';
+                input.style.boxShadow = '0 0 15px rgba(255, 152, 0, 0.3)';
+            } else {
+                input.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+                input.style.boxShadow = 'none';
+            }
+        }
+
+        function animateSelection(element) {
+            element.style.transform = 'scale(1.05)';
+            element.style.boxShadow = '0 0 20px rgba(102, 126, 234, 0.5)';
+
+            setTimeout(() => {
+                element.style.transform = 'scale(1)';
+                element.style.boxShadow = 'none';
+            }, 300);
+        }
+
+        // Form submission handling
+        document.getElementById('correctionForm').addEventListener('submit', function (e) {
+            const selectedNakshatra = document.getElementById('manual_nakshatra').value;
+
+            if (!selectedNakshatra) {
+                e.preventDefault();
+                alert('దయచేసి నక్షత్రం ఎంచుకోండి');
+                document.getElementById('manual_nakshatra').focus();
+                return;
+            }
+
+            // Add loading animation
+            const submitBtn = this.querySelector('.confirm-btn');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> గణన చేస్తోంది...';
+            submitBtn.disabled = true;
+
+            // Re-enable after 3 seconds in case of error
+            setTimeout(() => {
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }, 3000);
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function (e) {
+            // Ctrl + Enter to submit
+            if (e.ctrlKey && e.key === 'Enter') {
+                document.querySelector('.confirm-btn').click();
+            }
+
+            // Escape to go back
+            if (e.key === 'Escape') {
+                window.history.back();
+            }
+        });
+    </script>
+
+</body>
+
+</html>
