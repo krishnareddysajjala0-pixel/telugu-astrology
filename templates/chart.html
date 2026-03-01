@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>జాఫతకము</title>
   <!-- PWA settings -->
   <link rel="manifest" href="/static/manifest.json">
@@ -307,20 +308,6 @@
       position: relative;
     }
 
-    .lagna::before {
-      content: 'లగ్నం';
-      position: absolute;
-      top: -12px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: gold;
-      color: #000;
-      padding: 4px 12px;
-      border-radius: 15px;
-      font-size: 11px;
-      font-weight: bold;
-      z-index: 2;
-    }
 
     /* ===== TEXT ===== */
     .house-no {
@@ -860,33 +847,35 @@
 
             <div class="person-name">{{ name }}</div>
 
-            <div class="info-line">
-              <i class="fas fa-calendar-alt"></i>
-              <span>{{ dob }} ({{ day_name }})</span>
-            </div>
-
-            <div class="info-line">
-              <i class="fas fa-clock"></i>
-              <span>{{ tob }}</span>
-            </div>
-
-            <div class="info-line">
-              <i class="fas fa-map-marker-alt"></i>
-              <span>{{ place.split(',')[0] if ',' in place else place }}</span>
-            </div>
-
-            <!-- LAGNA DEGREE IN CENTER -->
-            <div class="info-line">
-              <i class="fas fa-compass"></i>
-              <span>లగ్నం: {{ lagna }} {% if lagna_deg is defined and lagna_deg %}({{ lagna_deg }}){% endif %}</span>
-            </div>
+            <table
+              style="width: 100%; border-collapse: separate; border-spacing: 0 5px; font-size: 13px; text-align: left; margin: 0 auto;">
+              <tr>
+                <td style="color: #ffd700; width: 35%; white-space: nowrap;"><i class="fas fa-calendar-alt"></i> తేదీ:
+                </td>
+                <td style="color: var(--text-main);">{{ dob }} ({{ day_name }})</td>
+              </tr>
+              <tr>
+                <td style="color: #ffd700;"><i class="fas fa-clock"></i> సమయం:</td>
+                <td style="color: var(--text-main);">{{ tob }}</td>
+              </tr>
+              <tr>
+                <td style="color: #ffd700;"><i class="fas fa-map-marker-alt"></i> స్థలం:</td>
+                <td style="color: var(--text-main);">{{ place.split(',')[0] if ',' in place else place }}</td>
+              </tr>
+              <tr>
+                <td style="color: #ffd700;"><i class="fas fa-compass"></i> లగ్నం:</td>
+                <td style="color: var(--text-main);">{{ lagna }} {% if lagna_deg is defined and lagna_deg %}({{
+                  lagna_deg }}){% endif %}</td>
+              </tr>
+              <tr>
+                <td style="color: #ffd700; white-space: nowrap;"><i class="fas fa-star"></i> నక్షత్రం:</td>
+                <td style="color: var(--text-main);">{{ nakshatra }} ({{ padam }} పాదం)</td>
+              </tr>
+            </table>
 
             <div class="divider"></div>
 
-            <div class="nakshatra-info">
-              <div class="nakshatra-title">
-                <i class="fas fa-star"></i> {{ nakshatra }} ({{ padam }} పాదం)
-              </div>
+            <div class="nakshatra-info" style="margin-top: 5px; padding: 5px;">
 
               <div class="time-info">
                 <div class="time-item">
@@ -926,6 +915,10 @@
       <button class="float-btn" style="background: linear-gradient(135deg, #8b5cf6, #6d28d9);"
         onclick="goToDasaChart()">
         <i class="fas fa-calendar-alt"></i> దశాచార
+      </button>
+      <button class="float-btn" style="background: linear-gradient(135deg, #e11d48, #be123c);"
+        onclick="window.location.href='/panchangam'">
+        <i class="fas fa-calendar-day"></i> పంచాంగం
       </button>
       <button class="float-btn" style="background: linear-gradient(135deg, #ff9800, #f57c00);"
         onclick="goToCorrection()">

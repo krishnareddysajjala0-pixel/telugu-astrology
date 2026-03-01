@@ -60,6 +60,35 @@ NAKSHATRAS_TELUGU = [
 NAKSHATRA_SIZE = 13 + 20/60
 PADAM_SIZE = NAKSHATRA_SIZE / 4
 
+TELUGU_YEARS = [
+    "ప్రభవ", "విభవ", "శుక్ల", "ప్రమోదూత", "ప్రజోత్పత్తి", "ఆంగీరస", "శ్రీముఖ", "భావ", "యువ", "ధాత",
+    "ఈశ్వర", "బహుధాన్య", "ప్రమాది", "విక్రమ", "వృష", "చిత్రభాను", "స్వభాను", "తారణ", "పార్థివ", "వ్యయ",
+    "సర్వజిత్తు", "సర్వధారి", "విరోధి", "వికృతి", "ఖర", "నందన", "విజయ", "జయ", "మన్మథ", "దుర్ముఖి",
+    "హేవిలంబి", "విలంబి", "వికారి", "శార్వరి", "ప్లవ", "శుభకృతు", "శోభకృతు", "క్రోధి", "విశ్వావసు", "పరాభవ",
+    "ప్లవంగ", "కీలక", "సౌమ్య", "సాధారణ", "విరోధికృతు", "పరీధావి", "ప్రమాదీచ", "ఆనంద", "రాక్షస", "నల",
+    "పింగళ", "కాళయుక్తి", "సిద్ధార్థి", "రౌద్రి", "దుర్మతి", "దుందుభి", "రుధిరోద్గారి", "రక్తాక్షి", "క్రోధన", "అక్షయ"
+]
+
+# ---------------- Panchangam Data ----------------
+TITHIS_TELUGU = [
+    "పాడ్యమి", "విదియ", "తదియ", "చవితి", "పంచమి", "షష్ఠి", "సప్తమి",
+    "అష్టమి", "నవమి", "దశమి", "ఏకాదశి", "ద్వాదశి", "త్రయోదశి", "చతుర్దశి", "పౌర్ణమి"
+]
+
+TITHIS_KRISHNA_TELUGU = [
+    "పాడ్యమి", "విదియ", "తదియ", "చవితి", "పంచమి", "షష్ఠి", "సప్తమి",
+    "అష్టమి", "నవమి", "దశమి", "ఏకాదశి", "ద్వాదశి", "త్రయోదశి", "చతుర్దశి", "అమావాస్య"
+]
+
+YOGAS_TELUGU = [
+    "విష్కంభ", "ప్రీతి", "ఆయుష్మాన్", "సౌభాగ్య", "శోభన", "అతిగండ", "సుకర్మ",
+    "ధృతి", "శూల", "గండ", "వృధ్ధి", "ధ్రువ", "వ్యాఘాత", "హర్షణ", "వజ్ర", "సిద్ధి",
+    "వ్యతీపాత", "వరియాన్", "పరీఘ", "శివ", "సిద్ధ", "సాధ్య", "శుభ", "శుక్ల",
+    "బ్రహ్మ", "ఇంద్ర", "వైధృతి"
+]
+
+KARANAS_MOVABLE = ["బవ", "బాలవ", "కౌలవ", "తైతిల", "గర", "వణిజ", "విష్టి"]
+
 # ---------------- DASA CALCULATION DATA ----------------
 DASA_ORDER = [
     "సూర్య","చంద్ర","కుజ","రాహు","గురు","భూమి",
@@ -170,6 +199,25 @@ PLANET_ICONS = {
     "మిత్ర": "☆",
     "చిత్ర": "✦"
 }
+
+# Month mappings linking Telugu to English Gregorian periods
+TELUGU_MASALU = [
+    "చైత్ర", "వైశాఖ", "జ్యేష్ఠ", "ఆషాఢ", "శ్రావణ", "భాద్రపద", 
+    "ఆశ్వయుజ", "కార్తీక", "మార్గశిర", "పుష్య", "మాఘ", "ఫాల్గుణ"
+]
+
+ENGLISH_MONTHS = [
+    "(March - April)", "(April - May)", "(May - June)", "(June - July)",
+    "(July - August)", "(August - September)", "(September - October)",
+    "(October - November)", "(November - December)", "(December - January)",
+    "(January - February)", "(February - March)"
+]
+
+# Rutuvulu mappings
+TELUGU_RUTUVULU = [
+    "వసంత", "గ్రీష్మ", "వర్ష", 
+    "శరత్", "హేమంత", "శిశిర"
+]
 
 # ---------------- ASTROLOGICAL PARTIES ----------------
 # Lagnas belonging to Guru Party
@@ -365,6 +413,26 @@ def chart():
         html_str = f"<b>{n}</b> <small>{d}°{m:02d}′</small>"
         chart_data_temp[r].append((deg, html_str))
 
+    # Month mappings linking Telugu to English Gregorian periods
+    TELUGU_MASALU = [
+        "చైత్ర", "వైశాఖ", "జ్యేష్ఠ", "ఆషాఢ", "శ్రావణ", "భాద్రపద", 
+        "ఆశ్వయుజ", "కార్తీక", "మార్గశిర", "పుష్య", "మాఘ", "ఫాల్గుణ"
+    ]
+
+    ENGLISH_MONTHS = [
+        "(March - April)", "(April - May)", "(May - June)", "(June - July)",
+        "(July - August)", "(August - September)", "(September - October)",
+        "(October - November)", "(November - December)", "(December - January)",
+        "(January - February)", "(February - March)"
+    ]
+
+    # Rutuvulu mappings
+    TELUGU_RUTUVULU = [
+        "వసంత", "గ్రీష్మ", "వర్ష", 
+        "శరత్", "హేమంత", "శిశిర"
+    ]
+
+# Dasa parameters
     # Hand planets
     for n, base in base_pos.items():
         angles = [180] + SPECIAL_HANDS.get(n,[])
@@ -424,12 +492,178 @@ def chart():
     for i in range(12):
         houses_map[RASI_TELUGU[(idx+i)%12]] = i+1
 
+    # Calculate Panchangam components (Tithi, Yoga, Karana)
+    sun_lon = base_pos["సూర్యుడు"]
+    moon_lon = base_pos["చంద్రుడు"]
+
+    # 1. Tithi
+    diff = (moon_lon - sun_lon) % 360
+    tithi_index = int(diff / 12)
+    tithi_paksha = "శుక్ల పక్షం" if tithi_index < 15 else "కృష్ణ పక్షం"
+    
+    if tithi_index < 15:
+        tithi_name = TITHIS_TELUGU[tithi_index]
+    else:
+        tithi_name = TITHIS_KRISHNA_TELUGU[tithi_index - 15]
+
+    tithi_offset = diff - (tithi_index * 12)
+    # Tithi spans 12 degrees roughly representing a 24-hour cycle. 
+    # Calculate elapsed and remaining time proportionally
+    t_elapsed_h = int((tithi_offset / 12) * 24)
+    t_elapsed_m = int((((tithi_offset / 12) * 24) % 1) * 60)
+    
+    t_rem = 12 - tithi_offset
+    t_remain_h = int((t_rem / 12) * 24)
+    t_remain_m = int((((t_rem / 12) * 24) % 1) * 60)
+
+    tithi_elapsed_str = f"{t_elapsed_h}గం {t_elapsed_m}ని"
+    tithi_remaining_str = f"{t_remain_h}గం {t_remain_m}ని"
+
+    # 2. Yoga
+    yoga_index = int(((sun_lon + moon_lon) % 360) / NAKSHATRA_SIZE)
+    yoga_name = YOGAS_TELUGU[yoga_index]
+
+    # 3. Karana
+    karana_idx = int(diff / 6) + 1
+    if karana_idx == 1:
+        karana_name = "కింస్తుఘ్న"
+    elif 2 <= karana_idx <= 57:
+        m_idx = (karana_idx - 2) % 7
+        karana_name = KARANAS_MOVABLE[m_idx]
+    elif karana_idx == 58:
+        karana_name = "శకుని"
+    elif karana_idx == 59:
+        karana_name = "చతుష్పాద"
+    elif karana_idx == 60:
+        karana_name = "నాగ"
+    else:
+        karana_name = "N/A"
+
+    # 4. Telugu Year (Samvatsara) approximation
+    # 0 = Prabhava starts roughly near Kaliyuga 0 or offset 1987 CE
+    # A standard quick approximation from gregorian year. Note Chaitra month starts the year.
+    try:
+        dt = datetime.datetime.strptime(dob + " " + tob, "%Y-%m-%d %H:%M")
+    except Exception:
+        dt = datetime.datetime.now()
+        
+    year = dt.year
+    month = dt.month
+    # Approximate leap: if month < 4 (before April/Chaitra), mostly previous year
+    adj_year = year - 1 if month < 4 else year
+    # Offset based on known cycle starting year (1987 was Prabhava)
+    year_index = (adj_year - 1987) % 60
+    telugu_year = TELUGU_YEARS[year_index]
+    
+    # 1987 (Prabhava, index 0) = Kaliyuga 5088. Using the exact cycle multiplier ties it perfectly.
+    cycles_since_1987 = (adj_year - 1987) // 60
+    kaliyuga_year = 5088 + (cycles_since_1987 * 60) + year_index
+    
+    # Thraitha Sakamu mapping: 2025 (Viswavasu) = 47.
+    # Therefore, adj_year - 2025 gives the offset from 47.
+    thraitha_sakamu = 47 + (adj_year - 2025)
+
+    # 5. Sunrise & Sunset times
+    # swe.rise_trans(tjdut, body, rsmi, geopos, atpress, attemp, flags)
+    res_rise = swe.rise_trans(jd, swe.SUN, swe.CALC_RISE|swe.BIT_DISC_CENTER, (lon, lat, 0), 0.0, 0.0, swe.FLG_SWIEPH)
+    res_set = swe.rise_trans(jd, swe.SUN, swe.CALC_SET|swe.BIT_DISC_CENTER, (lon, lat, 0), 0.0, 0.0, swe.FLG_SWIEPH)
+    
+    # Convert UT to IST for display
+    def jd_to_ist_str(jd_time):
+        year, month, day, hour_float = swe.revjul(jd_time)
+        dt_ut = datetime.datetime(year, month, day, int(hour_float), int((hour_float % 1)*60))
+        ut_zone = pytz.timezone("UTC")
+        dt_ut = ut_zone.localize(dt_ut)
+        dt_ist = dt_ut.astimezone(pytz.timezone("Asia/Kolkata"))
+        return dt_ist.strftime("%I:%M %p")
+
+    suryodayam = jd_to_ist_str(res_rise[1][0])
+    suryastamayam = jd_to_ist_str(res_set[1][0])
+
+    # 6. Ayanam, Rutuvu, & Telugu Masam
+    # Ayanam: Sun between 270 (Capricorn) and 90 (Cancer) is Uttarayana
+    if sun_lon >= 270 or sun_lon < 90:
+        ayanam = "ఉత్తరాయణం (Uttarayanam)"
+    else:
+        ayanam = "దక్షిణాయణం (Dakshinayanam)"
+        
+    # Rutuvu: 6 seasons, each spanning 60 degrees of solar longitude starting from 0 (Vasantha)
+    rutu_index = int((sun_lon % 360) / 60)
+    rutuvu = TELUGU_RUTUVULU[rutu_index]
+    
+    # Masam (Month): Exact Telugu Lunar Month mapped to Sun/Moon Amavasya boundaries
+    def find_amavasya(jd_guess):
+        jd_val = jd_guess
+        for _ in range(10):
+            m = swe.calc_ut(jd_val, swe.MOON)[0][0]
+            s = swe.calc_ut(jd_val, swe.SUN)[0][0]
+            df = (m - s) % 360
+            if df > 180: df -= 360
+            jd_val -= df / 12.190749
+            if abs(df) < 0.0001:
+                break
+        return jd_val
+
+    diff_moon_sun = (moon_lon - sun_lon) % 360
+    days_since = diff_moon_sun / 12.190749
+    days_to = (360 - diff_moon_sun) / 12.190749
+    
+    jd_start = find_amavasya(jd - days_since)
+    jd_end = find_amavasya(jd + days_to)
+    
+    # Calculate exact month name mapping based on the Amavasya's Solar intersection
+    amavasya_sun_lon = swe.calc_ut(jd_start, swe.SUN)[0][0]
+    rasi_idx = int((amavasya_sun_lon % 360) / 30)
+    masam_index = (rasi_idx + 1) % 12
+    telugu_masam_name = TELUGU_MASALU[masam_index]
+    
+    EN_TO_TELUGU_MONTHS = {
+        "january": "జనవరి", "february": "ఫిబ్రవరి", "march": "మార్చి",
+        "april": "ఏప్రిల్", "may": "మే", "june": "జూన్",
+        "july": "జూలై", "august": "ఆగస్టు", "september": "సెప్టెంబర్",
+        "october": "అక్టోబర్", "november": "నవంబర్", "december": "డిసెంబర్"
+    }
+    
+    def format_jd(jd_time):
+        y, m_dt, d, h = swe.revjul(jd_time)
+        dt_val = datetime.datetime(y, m_dt, d, int(h), int((h%1)*60))
+        dt_val = pytz.utc.localize(dt_val).astimezone(pytz.timezone('Asia/Kolkata'))
+        en_month = dt_val.strftime("%B").lower()
+        te_month = EN_TO_TELUGU_MONTHS.get(en_month, en_month)
+        return f"{te_month}-{d:02d}"
+
+    telugu_masam = f"{masam_index+1}. {telugu_masam_name} మాసం ({format_jd(jd_start)} నుంచి {format_jd(jd_end)} వరకు)"
+
+    # 7. Extract Planetary Positions
+    planet_positions = []
+    for n, longt in base_pos.items():
+        r = RASI_TELUGU[int(longt/30)]
+        d = int(longt % 30)
+        m = int(((longt % 30) - d) * 60)
+        
+        # calculate nakshatra for the planet
+        p_nak_idx = int(longt / NAKSHATRA_SIZE)
+        p_nak_name = NAKSHATRAS_TELUGU[p_nak_idx]
+        p_nak_offset = longt - (p_nak_idx * NAKSHATRA_SIZE)
+        p_padam = int(p_nak_offset / PADAM_SIZE) + 1
+        
+        planet_positions.append({
+            "name": n,
+            "rasi": r,
+            "degree": f"{d}°{m:02d}′",
+            "nakshatra": p_nak_name,
+            "padam": p_padam
+        })
+
+
     # Store birth info in session for other pages
     session['birth_info'] = {
         'name': name,
         'dob': dob,
         'tob': tob,
         'place': place,
+        'lat': lat,
+        'lon': lon,
         'day_name': day_name,
         'nakshatra': nakshatra,
         'padam': padam,
@@ -439,7 +673,21 @@ def chart():
         'elapsed_h': elapsed_h,
         'elapsed_m': elapsed_m,
         'lagna_deg': lagna_degree_str,
-        'lagna': lagna
+        'lagna': lagna,
+        'tithi_paksha': tithi_paksha,
+        'tithi_name': tithi_name,
+        'tithi_elapsed': tithi_elapsed_str,
+        'tithi_remaining': tithi_remaining_str,
+        'telugu_year': telugu_year,
+        'year_index': year_index,
+        'kaliyuga_year': kaliyuga_year,
+        'thraitha_sakamu': thraitha_sakamu,
+        'suryodayam': suryodayam,
+        'suryastamayam': suryastamayam,
+        'ayanam': ayanam,
+        'rutuvu': rutuvu,
+        'telugu_masam': telugu_masam,
+        'planet_positions': planet_positions
     }
 
     return render_template(
@@ -690,13 +938,38 @@ def chart3():
     lagna = birth_info.get('lagna', '')
     return render_template("chart3.html", current_year=current_year, lagna=lagna)
 
+@app.route("/panchangam")
+def panchangam():
+    """Display Panchangam Information"""
+    birth_info = session.get('birth_info', {})
+    if not birth_info:
+        return redirect(url_for('index'))
+    return render_template("panchangam.html", **birth_info)
+
 @app.route("/go-to-birth-chart")
 def go_to_birth_chart():
     """Redirect to birth chart with session data"""
     birth_info = session.get('birth_info', {})
     if birth_info:
-        # Pass data to chart.html template
-        return render_template("chart.html", **birth_info)
+        # Instead of just rendering chart.html which requires complex SWISSEPH calculations,
+        # we repopulate a pseudo-form request to the main chart endpoint or we can 
+        # just regenerate chart() if we refactored it. Since /chart expects POST data,
+        # we'll build a simple redirect page that auto-submits.
+        return f"""
+        <html>
+            <body onload="document.forms[0].submit()">
+                <form action="/chart" method="POST">
+                    <input type="hidden" name="name" value="{birth_info.get('name', '')}">
+                    <input type="hidden" name="dob" value="{birth_info.get('dob', '')}">
+                    <input type="hidden" name="tob" value="{birth_info.get('tob', '')}">
+                    <input type="hidden" name="place" value="{birth_info.get('place', '')}">
+                    <input type="hidden" name="lat" value="{birth_info.get('lat', '')}">
+                    <input type="hidden" name="lon" value="{birth_info.get('lon', '')}">
+                </form>
+                <p>Loading Birth Chart...</p>
+            </body>
+        </html>
+        """
     else:
         # Redirect to index if no birth info
         return redirect(url_for('index'))
@@ -777,6 +1050,7 @@ def manual_nakshatra():
         'dob': dob,
         'tob': tob,
         'place': place,
+        'day_name': session.get('birth_info', {}).get('day_name', ''),
         'nakshatra': manual_nakshatra_name or NAKSHATRAS_TELUGU[auto_nak_index],
         'padam': padam,
         'nak_elapsed': nak_elapsed,
@@ -784,7 +1058,16 @@ def manual_nakshatra():
         'nak_index': nak_index,
         'elapsed_h': manual_h,
         'elapsed_m': manual_m,
-        'lagna': session.get('birth_info', {}).get('lagna', '')
+        'lagna': session.get('birth_info', {}).get('lagna', ''),
+        'lagna_deg': session.get('birth_info', {}).get('lagna_deg', ''),
+        'tithi_paksha': session.get('birth_info', {}).get('tithi_paksha', ''),
+        'tithi_name': session.get('birth_info', {}).get('tithi_name', ''),
+        'yoga_name': session.get('birth_info', {}).get('yoga_name', ''),
+        'karana_name': session.get('birth_info', {}).get('karana_name', ''),
+        'telugu_year': session.get('birth_info', {}).get('telugu_year', ''),
+        'suryodayam': session.get('birth_info', {}).get('suryodayam', ''),
+        'suryastamayam': session.get('birth_info', {}).get('suryastamayam', ''),
+        'planet_positions': session.get('birth_info', {}).get('planet_positions', [])
     }
     
     return render_template(

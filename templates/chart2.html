@@ -958,7 +958,57 @@
             opacity: 1;
             background: rgba(120, 120, 120, 0.2);
             box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
+
+            /* Mobile Responsive adjustments */
+            @media (max-width: 768px) {
+                .maha-dasa-header {
+                    flex-direction: column;
+                    align-items: flex-start;
+                    gap: 12px;
+                }
+
+                .maha-dasa-badges {
+                    flex-wrap: wrap;
+                    margin-top: 5px;
+                }
+
+                .info-row {
+                    flex-direction: column;
+                    gap: 10px;
+                }
+
+                .anthara-table {
+                    font-size: 11px;
+                }
+
+                .anthara-table th,
+                .anthara-table td {
+                    padding: 6px 4px;
+                }
+
+                .table-icon {
+                    width: 18px;
+                    height: 18px;
+                    font-size: 12px;
+                }
+
+                .person-name {
+                    font-size: 20px;
+                }
+
+                .summary-grid {
+                    grid-template-columns: 1fr;
+                }
+
+                .chart-form-buttons {
+                    flex-direction: column;
+                }
+
+                .chart-form-btn {
+                    width: 100%;
+                    min-width: 100%;
+                }
+            }
     </style>
 </head>
 
@@ -1223,6 +1273,10 @@
         <button class="float-btn" style="background: linear-gradient(135deg, #f59e0b, #d97706);"
             onclick="goToPlanetDetails()">
             <i class="fas fa-book"></i> గ్రహ వివరాలు
+        </button>
+        <button class="float-btn" style="background: linear-gradient(135deg, #e11d48, #be123c);"
+            onclick="window.location.href='/panchangam'">
+            <i class="fas fa-calendar-day"></i> పంచాంగం
         </button>
         <button class="float-btn" style="background: linear-gradient(135deg, #ff9800, #f57c00);"
             onclick="goToCorrection()">

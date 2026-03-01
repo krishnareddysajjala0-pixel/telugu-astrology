@@ -1,0 +1,24 @@
+﻿Calculate times of rising, setting and meridian transits.
+
+:Args: float tjdut, int or str body, int rsmi, seq geopos, float atpress=0.0, float attemp=0.0, int flags=FLG_SWIEPH
+
+ - tjdut: input time, Julian day number, Universal Time
+ - body: planet identifier (int) or fixed star name (str)
+ - rsmi: bit flag for rise, set, or one of the two meridian transits, etc
+ - geopos: a sequence for:
+    - 0: geographic longitude, in degrees (eastern positive)
+    - 1: geographic latitude, in degrees (northern positive)
+    - 2: geographic altitude, in meters above sea level
+ - atpress: atmospheric pressure in mbar/hPa
+ - attemp: atmospheric temperature in degrees Celsius
+ - flags: ephemeris flags etc
+
+:Return: int res, (tret)
+
+ - res: integer indicating:
+    - (0) event found
+    - (-2) event not found because the object is circumpolar
+ - tret: tuple of 10 float, of which:
+    - 0: tjd of event
+
+This function raises swisseph.Error in case of fatal error.
