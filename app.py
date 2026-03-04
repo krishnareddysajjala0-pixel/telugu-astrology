@@ -589,19 +589,14 @@ def chart():
         res_set = swe.rise_trans(jd_midnight, swe.SUN, swe.CALC_SET|swe.BIT_DISC_CENTER, (lon, lat, 0.0), 0.0, 0.0, swe.FLG_SWIEPH)
     except TypeError:
         try:
-            # Fallback 1: Legacy API with starname and epheflag preceding
-            res_rise = swe.rise_trans(jd_midnight, swe.SUN, "", swe.FLG_SWIEPH, swe.CALC_RISE|swe.BIT_DISC_CENTER, (lon, lat, 0.0), 0.0, 0.0)
-            res_set = swe.rise_trans(jd_midnight, swe.SUN, "", swe.FLG_SWIEPH, swe.CALC_SET|swe.BIT_DISC_CENTER, (lon, lat, 0.0), 0.0, 0.0)
-        except TypeError:
-            try:
-                # Fallback 2: Omit all trailing optionals
-                res_rise = swe.rise_trans(jd_midnight, swe.SUN, swe.CALC_RISE|swe.BIT_DISC_CENTER, (lon, lat, 0.0))
-                res_set = swe.rise_trans(jd_midnight, swe.SUN, swe.CALC_SET|swe.BIT_DISC_CENTER, (lon, lat, 0.0))
-            except Exception as e:
-                # Fallback 3: Safe zero-out to completely prevent 500 Crash
-                print(f"rise_trans signature completely failed. Resolving to defaults: {e}")
-                res_rise = (0, (jd_midnight, 0))
-                res_set = (0, (jd_midnight, 0))
+            # Fallback 2: Omit all trailing optionals
+            res_rise = swe.rise_trans(jd_midnight, swe.SUN, swe.CALC_RISE|swe.BIT_DISC_CENTER, (lon, lat, 0.0))
+            res_set = swe.rise_trans(jd_midnight, swe.SUN, swe.CALC_SET|swe.BIT_DISC_CENTER, (lon, lat, 0.0))
+        except Exception as e:
+            # Fallback 3: Safe zero-out to completely prevent 500 Crash
+            print(f"rise_trans signature completely failed. Resolving to defaults: {e}")
+            res_rise = (0, (jd_midnight, 0))
+            res_set = (0, (jd_midnight, 0))
     
     # Convert UT to Local Time for display
     def jd_to_local_str(jd_time):
@@ -683,8 +678,7 @@ def chart():
         p_padam = int(p_nak_offset / PADAM_SIZE) + 1
         
         strength_pct = int(((longt % 30) / 30) * 100)
-        is_favorable = is_dasa_favorable(lagna, n)
-        color = "#4ade80" if is_favorable else "#ff6b6b"
+        color = PLANET_COLORS.get(n, "#ffffff")
         
         planet_positions.append({
             "name": n,
