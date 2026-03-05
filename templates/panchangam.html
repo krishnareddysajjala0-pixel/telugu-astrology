@@ -446,6 +446,7 @@
                 </thead>
                 <tbody>
                     {% for p in planet_positions %}
+                    {% if not p.is_hand %}
                     <tr>
                         <td class="planet-name-cell" style="color: {{ p.color }};">{{ p.name }}</td>
                         <td>{{ p.rasi }}</td>
@@ -453,6 +454,7 @@
                         <td>{{ p.nakshatra }} ({{ p.padam }}వ పాదం)</td>
                         <td style="color: {{ p.color }}; font-weight: bold;">{{ p.strength }}%</td>
                     </tr>
+                    {% endif %}
                     {% endfor %}
                 </tbody>
             </table>
@@ -468,6 +470,10 @@
         <button class="float-btn" style="background: linear-gradient(135deg, #4CAF50, #2E7D32);"
             onclick="window.location.href='/go-to-birth-chart'">
             <i class="fas fa-arrow-left"></i> కుండలికి
+        </button>
+        <button class="float-btn" style="background: linear-gradient(135deg, #ec4899, #be185d);"
+            onclick="window.location.href='/results'">
+            <i class="fas fa-chart-line"></i> ఫలితాలు
         </button>
         <button class="float-btn" style="background: linear-gradient(135deg, #f59e0b, #d97706);"
             onclick="window.location.href='/go-to-dasha-chart'">
