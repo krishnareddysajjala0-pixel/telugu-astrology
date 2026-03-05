@@ -2,6 +2,9 @@
 import swisseph as swe
 import datetime
 import pytz
+import os
+import threading
+import subprocess
 
 app = Flask(__name__)
 app.secret_key = 'astrology-secret-key-2024'  # Required for session
@@ -279,6 +282,46 @@ def is_date_within_range(check_date, start_date_str, end_date_str):
     except:
         return False
 
+# ---------------- GITHUB LOGGING HELPER ----------------
+def log_user_to_github(name, dob, tob, place):
+    """Log user data to user_data.txt and push to GitHub in the background."""
+    def background_task(n, d, t, p):
+        try:
+            log_file = "user_data.txt"
+            serial_no = 1
+            
+            # Read the last serial number if the file exists
+            if os.path.exists(log_file):
+                with open(log_file, "r", encoding="utf-8") as f:
+                    lines = f.readlines()
+                    if lines:
+                        last_line = lines[-1].strip()
+                        if last_line and ". " in last_line:
+                            try:
+                                serial_no = int(last_line.split(". ")[0]) + 1
+                            except ValueError:
+                                pass
+                                
+            timestamp = datetime.datetime.now().strftime("%d-%b-%Y %H:%M:%S")
+            log_entry = f"{serial_no}. [{timestamp}] Name: {n}, DOB: {d}, TOB: {t}, Place: {p}\n"
+            
+            # Append to file
+            with open(log_file, "a", encoding="utf-8") as f:
+                f.write(log_entry)
+                
+            # Git add, commit, and push
+            subprocess.run(["git", "add", log_file], check=True)
+            subprocess.run(["git", "commit", "-m", f"Log new user data for {n}"], check=True)
+            subprocess.run(["git", "push"], check=True)
+            
+        except Exception as e:
+            print(f"Error logging to Github: {e}")
+            
+    # Start thread so it doesn't block the response
+    thread = threading.Thread(target=background_task, args=(name, dob, tob, place))
+    thread.daemon = True
+    thread.start()
+
 def calculate_anthara_periods(maha_name, start_date, end_date, lagna="", birth_dt=None):
     """Calculate anthara periods for a given Mahadasha"""
     antharas = []
@@ -375,6 +418,9 @@ def chart():
 
     lat = float(lat)
     lon = float(lon)
+    
+    # Log User query to GitHub
+    log_user_to_github(name, dob, tob, place)
 
     # Day name
     day_eng = datetime.datetime.strptime(dob, "%Y-%m-%d").strftime("%A")
@@ -428,11 +474,11 @@ def chart():
     html_str = f"<b>కేతు</b> <small>{d}°{m:02d}′</small>"
     chart_data_temp[r].append((deg_k, html_str))
 
-    # Derived planets
+    # Derived planets (Dasacharam Logic - Verified)
     derived = {
         "భూమి": (base_pos["సూర్యుడు"] + 180) % 360,
-        "చిత్ర": (rahu + 3.3) % 360,
-        "మిత్ర": (ketu + 3.3) % 360
+        "చిత్ర": (rahu + 3.3333) % 360,  # 1 pada offset
+        "మిత్ర": (ketu + 3.3333) % 360   # 1 pada offset
     }
 
     for n, lonp in derived.items():
@@ -768,6 +814,7 @@ def chart():
         'elapsed_m': elapsed_m,
         'lagna_deg': lagna_degree_str,
         'lagna': lagna,
+        'moon_lon': moon_lon,
         'tithi_paksha': tithi_paksha,
         'tithi_name': tithi_name,
         'tithi_elapsed': tithi_elapsed_str,
@@ -867,9 +914,15 @@ def chart2():
     # 1. Calculate birth Mahadasha
     birth_dasa, dasa_index = get_running_dasa(nak_index, padam)
     
-    # 2. Calculate elapsed time in birth dasa
-    elapsed_minutes = nak_minutes(elapsed_h, elapsed_m)
-    fraction = elapsed_minutes / TOTAL_NAK_MINUTES if TOTAL_NAK_MINUTES > 0 else 0
+    # 2. Calculate elapsed time in birth dasa (Based on Rasi-based 30-degree movement)
+    moon_lon = birth_info.get('moon_lon')
+    if moon_lon is None:
+        # Fallback to manual timing if longitude not stored
+        elapsed_minutes = nak_minutes(elapsed_h, elapsed_m)
+        fraction = elapsed_minutes / TOTAL_NAK_MINUTES if TOTAL_NAK_MINUTES > 0 else 0
+    else:
+        # According to the text, each Dasa is 30 degrees (9 padas/1 Rasi)
+        fraction = (moon_lon % 30) / 30
     
     birth_dasa_years = DASA_YEARS.get(birth_dasa, 10)
     elapsed_years_in_birth_dasa = birth_dasa_years * fraction
