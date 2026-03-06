@@ -311,9 +311,9 @@ def log_user_to_github(name, dob, tob, place):
                 
             # Git add, commit, and push
             try:
-                res_add = subprocess.run(["git", "add", log_file], check=True, capture_output=True, text=True)
-                res_commit = subprocess.run(["git", "commit", "-m", f"Log new user data for {n}"], check=True, capture_output=True, text=True)
-                res_push = subprocess.run(["git", "push"], check=True, capture_output=True, text=True)
+                res_add = subprocess.run(["git", "add", log_file], check=True, capture_output=True, text=True, shell=True)
+                res_commit = subprocess.run(["git", "commit", "-m", f"Log new user data for {n}"], check=True, capture_output=True, text=True, shell=True)
+                res_push = subprocess.run(["git", "push"], check=True, capture_output=True, text=True, shell=True)
                 print(f"Successfully logged to Github. Push output: {res_push.stdout}")
             except subprocess.CalledProcessError as e:
                 print(f"Git subprocess error. Code: {e.returncode}")
@@ -1744,9 +1744,9 @@ def reset_user_data():
                 f.write("")
             
             # Git push to keep GitHub in sync
-            subprocess.run(["git", "add", log_file], check=True, capture_output=True, text=True)
-            subprocess.run(["git", "commit", "-m", "Reset user data log"], check=True, capture_output=True, text=True)
-            subprocess.run(["git", "push"], check=True, capture_output=True, text=True)
+            subprocess.run(["git", "add", log_file], check=True, capture_output=True, text=True, shell=True)
+            subprocess.run(["git", "commit", "-m", "Reset user data log"], check=True, capture_output=True, text=True, shell=True)
+            subprocess.run(["git", "push"], check=True, capture_output=True, text=True, shell=True)
             
             return jsonify({"status": "success", "message": "Data reset successfully!"})
         except Exception as e:
