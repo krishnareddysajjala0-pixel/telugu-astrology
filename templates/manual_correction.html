@@ -839,23 +839,23 @@
     <!-- Floating Bottom Action Bar -->
     <div class="fixed-bottom-bar" id="action-bar" style="z-index: 999999;">
         <button class="float-btn" style="background: linear-gradient(135deg, #1e3c72, #2a5298);"
-            onclick="navigateTo('/')">
+            onclick="window.location.href='/'">
             <i class="fas fa-home"></i> హోమ్
         </button>
         <button class="float-btn" style="background: linear-gradient(135deg, #4CAF50, #2E7D32);"
-            onclick="navigateTo('/go-to-birth-chart')">
+            onclick="window.location.href='/go-to-birth-chart'">
             <i class="fas fa-arrow-left"></i> కుండలికి
         </button>
         <button class="float-btn" style="background: linear-gradient(135deg, #8b5cf6, #6d28d9);"
-            onclick="navigateTo('/go-to-dasha-chart')">
+            onclick="window.location.href='/go-to-dasha-chart'">
             <i class="fas fa-calendar-alt"></i> దశాచార
         </button>
         <button class="float-btn" style="background: linear-gradient(135deg, #ec4899, #be185d);"
-            onclick="navigateTo('/results')">
+            onclick="window.location.href='/results'">
             <i class="fas fa-chart-line"></i> ఫలితాలు
         </button>
         <button class="float-btn" style="background: linear-gradient(135deg, #e11d48, #be123c);"
-            onclick="navigateTo('/panchangam')">
+            onclick="window.location.href='/panchangam'">
             <i class="fas fa-calendar-day"></i> పంచాంగం
         </button>
     </div>
@@ -1013,11 +1013,6 @@
         });
 
 
-        // Navigation helper
-        function navigateTo(url) {
-            console.log('Navigating to:', url);
-            window.location.href = url;
-        }
 
         // Keyboard shortcuts
         document.addEventListener('keydown', function (e) {
